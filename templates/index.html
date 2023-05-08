@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Stock Portfolio Suggestion Engine</title>
+</head>
+
+<body class="bg-dark text-white align-items-center justify-content-center">
+    
+    <div class="container p-5 my-5 bg-secondary text-white rounded col" >
+        <h1>Stock Portfolio Suggestion Engine</h1>
+        <form action="/output" method="post">
+            <div class="mb-3 mt-3">
+              <label for="amount" class="form-label">Amount:</label>
+              <input type="number" class="form-control bg-dark text-white" id="amount" placeholder="Enter amount" name="amount" min="5000" required="required">
+            </div>
+            <div class="mb-3">
+              <label for="strategy" class="form-label">Strategy:</label>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="strategy" value="e" checked style="background-color: black">
+                <label class="form-check-label" for="check1">Ethical Investing</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="strategy" value="g" style="background-color: black"/>
+                <label class="form-check-label" for="check2">Growth Investing</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="strategy" value="i" style="background-color: black"/>
+                <label class="form-check-label">Index Investing</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="strategy" value="q" style="background-color: black"/>
+                <label class="form-check-label">Quality Investing</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="strategy" value="v" style="background-color: black"/>
+                <label class="form-check-label">Value Investing</label>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-dark">Calculate</button>
+          </form>
+        <form action="{{ url_for('time_ticker') }}" method="post">
+            <div class="mb-3 mt-3">
+                <label for="amount" class="form-label">Ticker Company:</label>
+                <input type="text" class="form-control bg-dark text-white" id="company" placeholder="Enter Company name" name="company" >
+            </div>
+            <button type="submit" class="btn btn-dark">Show Time</button>
+        </form>
+
+    </div>
+</body>
+
+</html>
