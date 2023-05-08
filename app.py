@@ -28,6 +28,10 @@ value = ["INTC", "BABA", "GE"]
 def index():
     return render_template('signup.html')
 
+@app.route('/stock-input')
+def stock():
+    return render_template('index.html')
+
 
 @app.route('/output', methods=['POST'])
 def output():
