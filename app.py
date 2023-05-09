@@ -1,5 +1,6 @@
 import flask
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
+from flask_session import Session
 import requests
 import yfinance as yf
 from datetime import datetime,timedelta
@@ -197,10 +198,13 @@ def time_ticker():
 @app.route('/login', methods=['POST','GET'])
 def login():
     if flask.request.method == 'POST':
-        username =request.form.get('username')
-        password=request.form.get('password')
-        if(username==password):
-            return flask.redirect('/')
+        if session.get("name"):
+            username =request.form.get('username')
+            password=request.form.get('password')
+            if(username==session.get("name") and password==session.get("password")):
+                return flask.redirect('/stock-input')
+            else:
+                return flask.redirect("/signup")
     return render_template("login.html")
 
 
@@ -211,8 +215,13 @@ def register():
         password=request.form.get('password')
         repassword = request.form.get('repassword')
         if(repassword==password):
+            session["name"] = username
+            session["password"] = password
             return flask.redirect('/login')
     return render_template("signup.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
+    app.config["SESSION_PERMANENT"] = False
+    app.config["SESSION_TYPE"] = "filesystem"
+    Session(app)
